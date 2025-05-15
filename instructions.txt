@@ -1,0 +1,48 @@
+Voici une **version améliorée** de votre prompt pour Cursor AI et Zencoder, optimisée pour plus de clarté, de précision et de résultats complets :
+
+---
+
+### 🎯 Prompt amélioré :
+
+**Objectif :** Crée un projet Django complet pour un blog de voyages, prêt à être lancé et personnalisable.
+
+**Instructions détaillées :**
+
+1. **Structure du projet :**
+
+   * Génère l’arborescence complète d’un projet Django (models, views, templates, urls, static, media).
+   * Organise les fichiers selon les bonnes pratiques Django.
+
+2. **Modèle Article :**
+
+   * Crée le modèle `Article` avec les champs suivants :
+
+     * `titre` (CharField)
+     * `contenu` (TextField)
+     * `catégorie` (choices : lieux à visiter, restaurants)
+     * `image` (ImageField)
+     * `date_publication` (DateTimeField)
+
+3. **Administration :**
+
+   * Configure l’interface d’administration Django pour gérer les articles avec un affichage personnalisé (list\_display, search\_fields, etc.).
+
+4. **Pages et fonctionnalités :**
+
+   * Page d’accueil : affiche les 10 derniers articles publiés, triés par date décroissante.
+   * Pages catégories : filtre les articles selon la catégorie (lieux à visiter ou restaurants).
+   * Mise en place d’un système de pagination sur les listes d’articles.
+   * Templates HTML intégrant Bootstrap pour un design simple et responsive.
+
+5. **Commandes et installation :**
+
+   * Fournis la liste des dépendances (requirements.txt).
+   * Donne les étapes d’installation du projet (migrations, superuser, collectstatic).
+   * Précise les commandes pour lancer le serveur de développement.
+
+6. **Bonus :**
+
+   * Fournis un exemple minimal de données (fixtures) pour tester le blog immédiatement.
+
+**Contraintes :**
+Code propre, commenté, respectant les bonnes pratiques Django 4.x.

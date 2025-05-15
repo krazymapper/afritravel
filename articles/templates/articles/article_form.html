@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if form.instance.pk %}
+        Modifier l'article - Blog de Voyages
+    {% else %}
+        Nouvel article - Blog de Voyages
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">
+            {% if form.instance.pk %}
+                Modifier l'article
+            {% else %}
+                Créer un nouvel article
+            {% endif %}
+        </h1>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            
+            <div>
+                <label for="{{ form.titre.id_for_label }}" class="block text-sm font-medium text-gray-700">Titre</label>
+                {{ form.titre }}
+                {% if form.titre.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.titre.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.categorie.id_for_label }}" class="block text-sm font-medium text-gray-700">Catégorie</label>
+                {{ form.categorie }}
+                {% if form.categorie.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.categorie.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.adresse.id_for_label }}" class="block text-sm font-medium text-gray-700">Adresse</label>
+                {{ form.adresse }}
+                {% if form.adresse.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.adresse.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.latitude.id_for_label }}" class="block text-sm font-medium text-gray-700">Latitude</label>
+                {{ form.latitude }}
+                {% if form.latitude.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.latitude.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.longitude.id_for_label }}" class="block text-sm font-medium text-gray-700">Longitude</label>
+                {{ form.longitude }}
+                {% if form.longitude.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.longitude.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.image.id_for_label }}" class="block text-sm font-medium text-gray-700">Image</label>
+                {{ form.image }}
+                {% if form.image.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.image.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.contenu.id_for_label }}" class="block text-sm font-medium text-gray-700">Contenu</label>
+                {{ form.contenu }}
+                {% if form.contenu.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.contenu.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div class="flex justify-end space-x-4">
+                <a href="{% url 'articles:article_list' %}" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
+                    Annuler
+                </a>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    {% if form.instance.pk %}
+                        Enregistrer les modifications
+                    {% else %}
+                        Publier l'article
+                    {% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ form.media }}
+{% endblock %} 

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}À propos - AfriTravel{% endblock %}
+
+{% block content %}
+<div class="bg-gradient-to-b from-blue-50 to-white">
+    <!-- Hero Section -->
+    <div class="relative h-[40vh] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative container mx-auto px-4 h-full flex items-center">
+            <div class="text-white max-w-2xl">
+                <h1 class="text-5xl font-bold mb-4">À propos d'AfriTravel</h1>
+                <p class="text-xl">Découvrez notre mission et notre passion pour l'Afrique</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container mx-auto px-4 py-16">
+        <div class="max-w-4xl mx-auto">
+            <!-- Notre Mission -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Notre Mission</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    AfriTravel est né de la passion pour l'Afrique et de la volonté de partager ses merveilles avec le monde. Notre mission est de mettre en valeur la richesse culturelle, la diversité des paysages et l'authenticité des expériences que l'Afrique a à offrir.
+                </p>
+            </div>
+
+            <!-- Notre Vision -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Notre Vision</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Nous croyons que chaque voyage en Afrique est une opportunité de découverte, d'apprentissage et de connexion. Notre vision est de créer une communauté de voyageurs passionnés qui partagent leurs expériences authentiques et contribuent à une meilleure compréhension de ce continent fascinant.
+                </p>
+            </div>
+
+            <!-- Ce que nous offrons -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Ce que nous offrons</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-map-marker-alt text-primary text-3xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-3">Destinations uniques</h3>
+                        <p class="text-gray-600">Découvrez des lieux hors des sentiers battus et des expériences authentiques à travers l'Afrique.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-utensils text-primary text-3xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-3">Gastronomie locale</h3>
+                        <p class="text-gray-600">Explorez la richesse culinaire africaine à travers nos recommandations de restaurants et de spécialités locales.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notre équipe -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Notre équipe</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Nous sommes une équipe de passionnés de voyage et d'experts locaux qui partagent leur connaissance approfondie de l'Afrique. Notre objectif est de vous fournir des informations précises et des conseils pratiques pour rendre votre voyage inoubliable.
+                </p>
+            </div>
+
+            <!-- Contact -->
+            <div class="bg-blue-50 p-8 rounded-lg">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Contactez-nous</h2>
+                <p class="text-lg text-gray-600 mb-6">
+                    Vous avez des questions ou des suggestions ? N'hésitez pas à nous contacter !
+                </p>
+                <div class="flex space-x-4">
+                    <a href="mailto:contact@afritravel.com" class="text-primary hover:text-blue-800">
+                        <i class="fas fa-envelope mr-2"></i> contact@afritravel.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

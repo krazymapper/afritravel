@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Carte des points d'intérêt - Blog de Voyages{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+    #map {
+        height: 600px;
+        width: 100%;
+        border-radius: 0.5rem;
+    }
+    .leaflet-popup-content {
+        margin: 10px;
+    }
+    .popup-content {
+        padding: 5px;
+    }
+    .popup-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #2563eb;
+    }
+    .popup-category {
+        color: #4b5563;
+        font-size: 0.875rem;
+        margin-bottom: 5px;
+    }
+    .popup-address {
+        color: #6b7280;
+        font-size: 0.875rem;
+        margin-bottom: 10px;
+    }
+    .popup-image {
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 0.25rem;
+        margin-bottom: 10px;
+    }
+    .popup-link {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #2563eb;
+        color: white;
+        text-decoration: none;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+    }
+    .popup-link:hover {
+        background-color: #1d4ed8;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Carte des Points d'Intérêt</h1>
+        
+        <div id="map" class="shadow-lg"></div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialiser la carte centrée sur l'Afrique de l'Ouest
+        var map = L.map('map').setView([8.0, 2.0], 6);
+
+        // Ajouter le fond de carte OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Récupérer les marqueurs depuis le contexte Django
+        var markers = {{ markers|safe }};
+
+        // Ajouter les marqueurs sur la carte
+        markers.forEach(function(marker) {
+            var popupContent = `
+                <div class="popup-content">
+                    <div class="popup-title">${marker.titre}</div>
+                    <div class="popup-category">${marker.categorie}</div>
+                    <div class="popup-address">${marker.adresse}</div>
+                    ${marker.image ? `<img src="${marker.image}" alt="${marker.titre}" class="popup-image">` : ''}
+                    <a href="${marker.url}" class="popup-link">Voir l'article</a>
+                </div>
+            `;
+
+            L.marker([marker.latitude, marker.longitude])
+                .bindPopup(popupContent)
+                .addTo(map);
+        });
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blog de Voyages{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="{% url 'articles:article_list' %}" class="text-2xl font-bold text-gray-800">Blog de Voyages</a>
+                <div class="space-x-4">
+                    <a href="{% url 'articles:article_list' %}" class="text-gray-600 hover:text-gray-900">Articles</a>
+                    <a href="{% url 'articles:carte' %}" class="text-gray-600 hover:text-gray-900">Carte</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-white shadow-lg mt-8">
+        <div class="container mx-auto px-4 py-6">
+            <p class="text-center text-gray-600">&copy; 2024 Blog de Voyages. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+</html> 
