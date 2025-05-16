@@ -4,4 +4,4 @@ django-tinymce==3.7.1
 python-dotenv==1.0.1
 gunicorn
 dj-database-url
-psycopg2-binary 
+psycopg2-binary
