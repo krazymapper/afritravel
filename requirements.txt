@@ -1,4 +1,4 @@
-Django==5.2.1
+Django==5.2.2
 Pillow==10.2.0
 django-tinymce==3.7.1
 python-dotenv==1.0.1
