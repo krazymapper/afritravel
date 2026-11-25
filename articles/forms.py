@@ -2,6 +2,8 @@ from django import forms
 from .models import Article
 from tinymce.widgets import TinyMCE
 
+from .sanitize import clean_html
+
 class ArticleForm(forms.ModelForm):
     contenu = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
@@ -15,4 +17,7 @@ class ArticleForm(forms.ModelForm):
             'latitude': forms.NumberInput(attrs={'class': 'form-control', 'step': 'any'}),
             'longitude': forms.NumberInput(attrs={'class': 'form-control', 'step': 'any'}),
             'image': forms.FileInput(attrs={'class': 'form-control'}),
-        } 
+        }
+
+    def clean_contenu(self):
+        return clean_html(self.cleaned_data.get("contenu", ""))

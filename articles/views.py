@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.db.models import Q
 from .models import Article
 from .forms import ArticleForm
-import json
 
 class ArticleListView(ListView):
     model = Article
@@ -49,10 +48,10 @@ class CarteView(TemplateView):
                 'latitude': float(article.latitude),
                 'longitude': float(article.longitude),
                 'adresse': article.adresse,
-                'url': f'/article/{article.id}/',
+                'url': reverse('articles:article_detail', args=[article.id]),
                 'image': article.image.url if article.image else None
             })
-        context['markers'] = json.dumps(markers)
+        context['markers'] = markers  # sérialisé par json_script dans le gabarit
         return context
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):

@@ -2,12 +2,16 @@ services:
   - type: web
     name: afritravel
     env: python
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate --noinput"
     startCommand: "gunicorn blog_voyages.wsgi:application"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: blog_voyages.settings
       - key: SECRET_KEY
-        value: remplis-moi-avec-un-vrai-secret
+        generateValue: true
       - key: DEBUG
-        value: False
+        value: "False"
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      # ALLOWED_HOSTS : le nom Render est ajouté automatiquement (RENDER_EXTERNAL_HOSTNAME).
+      # DATABASE_URL : à définir pour PostgreSQL ; sinon SQLite éphémère (données perdues à chaque déploiement).

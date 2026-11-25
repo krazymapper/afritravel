@@ -64,7 +64,8 @@
     </div>
 </div>
 
-<script>
+{{ markers|json_script:"markers-data" }}
+    <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Initialiser la carte centrée sur l'Afrique de l'Ouest
         var map = L.map('map').setView([8.0, 2.0], 6);
@@ -74,23 +75,34 @@
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // Récupérer les marqueurs depuis le contexte Django
-        var markers = {{ markers|safe }};
+        // Marqueurs sérialisés par json_script (échappement sûr), popups construits
+        // en nœuds DOM : aucun titre ou adresse n'est interprété comme du HTML.
+        var markers = JSON.parse(document.getElementById('markers-data').textContent);
 
-        // Ajouter les marqueurs sur la carte
+        function el(tag, className, text) {
+            var n = document.createElement(tag);
+            if (className) n.className = className;
+            if (text) n.textContent = text;
+            return n;
+        }
+
         markers.forEach(function(marker) {
-            var popupContent = `
-                <div class="popup-content">
-                    <div class="popup-title">${marker.titre}</div>
-                    <div class="popup-category">${marker.categorie}</div>
-                    <div class="popup-address">${marker.adresse}</div>
-                    ${marker.image ? `<img src="${marker.image}" alt="${marker.titre}" class="popup-image">` : ''}
-                    <a href="${marker.url}" class="popup-link">Voir l'article</a>
-                </div>
-            `;
+            var box = el('div', 'popup-content');
+            box.appendChild(el('div', 'popup-title', marker.titre));
+            box.appendChild(el('div', 'popup-category', marker.categorie));
+            if (marker.adresse) box.appendChild(el('div', 'popup-address', marker.adresse));
+            if (marker.image) {
+                var img = el('img', 'popup-image');
+                img.src = marker.image;
+                img.alt = marker.titre;
+                box.appendChild(img);
+            }
+            var a = el('a', 'popup-link', "Voir l'article");
+            a.href = marker.url;
+            box.appendChild(a);
 
             L.marker([marker.latitude, marker.longitude])
-                .bindPopup(popupContent)
+                .bindPopup(box)
                 .addTo(map);
         });
     });
